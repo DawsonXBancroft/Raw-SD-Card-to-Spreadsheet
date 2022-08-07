@@ -241,7 +241,6 @@
 "gpsMessage"="gpsMessage"strApp"gpsByte62"
 "gpsMessage"="gpsMessage"strApp"gpsByte63"
 "gpsMessage"="gpsMessage"convertStrToChrs"
-"gpsMessage"="gpsMessage"rot"#$"#0"
 "timeUTChour"="gpsMessage"inds"#32"#33"
 "timeUTCmins"="gpsMessage"inds"#34"#35"
 "timeUTCsecs"="gpsMessage"inds"#36"#37"

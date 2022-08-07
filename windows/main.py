@@ -7,6 +7,8 @@ from tkinter import filedialog
 from PIL import Image, ImageTk  # installed via pillow not PIL
 import time
 
+# @author: DawsonXBancroft
+
 # GLOBALS --------------------------------------------------------------------------------------------------------------
 row_dict = {}
 config_dict = {}
@@ -63,9 +65,9 @@ def confirmAttachmentSelection():
 
 def confirmNumDataPoints():
     global num_data_pts
-    resetStatus()
-    numDataPoints = entry_numDataPoints.get()
-    label_numDataPoints.configure(text="Number Data Points: " + str(numDataPoints))
+    resetStatus()                               #changed 6/19/2022 by @dawsonxbancroft to fix -1 in data
+    num_data_pts = int(entry_numDataPoints.get())
+    label_numDataPoints.configure(text="Number Data Points: " + str(num_data_pts))
 
 
 def read_config_file(file_path):
@@ -563,12 +565,12 @@ window.geometry("925x700")
 window.config(background="#23272A")
 
 label_file_explorer = tk.Label(window,
-                               text="Raw to File Converter GUI v1.0.1",
+                               text="Raw to File Converter GUI v1.0.0",
                                width=30, height=4,
                                fg="#FFFFFF", bg="#2C2F33")
 
 logo = Image.open("images\\msgc_logo.png")
-logo = logo.resize((85, 60), Image.ANTIALIAS)
+logo = logo.resize((85, 60), Image.Resampling.LANCZOS)
 logo = ImageTk.PhotoImage(logo)
 label_logo = tk.Label(window, image=logo, width=700, anchor="e", bg="#23272A")
 
