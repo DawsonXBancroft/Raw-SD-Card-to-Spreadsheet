@@ -105,6 +105,9 @@ def parseCommandLineArgs():
 def configRead():
     global config_file_path
 
+    col_labels_dict = {}
+    col_vars_dict = {}
+    sd_card_setup_dict = {}
     # get column labels (column headers for csv file)
     for key, value in yaml.safe_load(open(config_file_path))['COL_LABELS'].items():
         print(key, value)

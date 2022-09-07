@@ -15,6 +15,7 @@ COL_VARS:
   COL_3     : "COL3_OUT"
 
 SDCARD_SETUP:
+  # ALL OF THESE PROBABLY NEED TO BE SET
   IMAGE_DATA          : False
   # only accepts true or false (hasn't been tested)
   NUM_CONFIG_BLOCKS   : 0
