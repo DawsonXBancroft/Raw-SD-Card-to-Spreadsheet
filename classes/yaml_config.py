@@ -15,13 +15,14 @@ class YamlConfig():
     def readInConfig(self):
         # get column labels (column headers for csv file)
         for key, value in yaml.safe_load(open(self.config_file_path))['COL_LABELS'].items():
-            print(key, value)
+            col_labels_dict[key] = value
 
         # get column vars (variables that will go in each row of the csv file)
         for key, value in yaml.safe_load(open(self.config_file_path))['COL_VARS'].items():
-            print(key, value)
+            col_vars_dict[key] = value
 
         # get sd card setup
         for key, value in yaml.safe_load(open(self.config_file_path))['SDCARD_SETUP'].items():
-            print(key, value)
+            sd_card_setup_dict[key] = value
+
 
