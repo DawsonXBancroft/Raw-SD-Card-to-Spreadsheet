@@ -3,8 +3,11 @@
 # python decodeSDData.py -type DEBUG -inputfile .\ExampleInput\210708_FLIGHT_DATAONLY_LORA_ONLY.txt
 import sys
 import os.path
-import yaml
 from enum import Enum
+
+sys.path.append('classes/')
+
+from yaml_config import *
 
 
 class Verbosity(Enum):
@@ -102,32 +105,13 @@ def parseCommandLineArgs():
             sys.exit()
 
 
-def configRead():
-    global config_file_path
-
-    col_labels_dict = {}
-    col_vars_dict = {}
-    sd_card_setup_dict = {}
-    # get column labels (column headers for csv file)
-    for key, value in yaml.safe_load(open(config_file_path))['COL_LABELS'].items():
-        print(key, value)
-
-    # get column vars (variables that will go in each row of the csv file)
-    for key, value in yaml.safe_load(open(config_file_path))['COL_VARS'].items():
-        print(key, value)
-
-    # get sd card setup
-    for key, value in yaml.safe_load(open(config_file_path))['SDCARD_SETUP'].items():
-        print(key, value)
-
-
-
 def __main__():
     # PARSE COMMAND LINE ARGUMENTS
     parseCommandLineArgs()
 
     # READ IN YAML (config) FILE
-    configRead()
+    yaml_cfg = YamlConfig(config_file_path)
+    yaml_cfg.readInConfig()
 
     # IF CONFIG DATA READ THAT IN (MAY CONTAIN # OF DATA POINTS)
 
