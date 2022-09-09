@@ -1,8 +1,8 @@
 # SDCardRawReader
 Python is used to convert the raw files spreadsheets. Mainly used get bakPack or LoRad data off of microSD cards.
 
-## Windows
-This one works but the current config files are not current and need updated. It also requires the use of Linux to run two commands, dd and hexdump.
+# decodeSDData.py
+This is the Python program to convert the data input from text file (and possibly directly from the SD card in the future) to an Excel workbook (.csv file).
 
-## Linux
-This one is currently being ported from the Windows version and does not work.
+Usage: ```decodeSDData.py [-inputfile <PATH> -type <{DEBUG, NO_ATTACH, NEMO}> [-outputfile <PATH>] [-verb" \
+            "osity [<LOW, MEDIUM, HIGH, DEBUG}>]] || [-gui]] ```
