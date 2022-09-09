@@ -7,6 +7,7 @@ class YamlConfig():
     col_labels_dict = {}
     col_vars_dict = {}
     sd_card_setup_dict = {}
+    config_block_info_dict = {}
 
 
     # When constructed, the config_file_path is required
@@ -39,6 +40,19 @@ class YamlConfig():
             self.sd_card_setup_dict[key] = value
             if self.verbosity.value > Verbosity.HIGH.value:
                 print(key, value)
+
+        # get configuration data info
+        if self.verbosity.value > Verbosity.HIGH.value:
+            print("\n    Getting " + str(self.sd_card_setup_dict["NUM_CONFIG_BLOCKS"]) + " Config Data Blocks Info")
+        for i in range(self.sd_card_setup_dict["NUM_CONFIG_BLOCKS"]):
+            print("\n    Reading CFG_" + i)
+            for key, value in yaml.safe_load(open(self.config_file_path))['CFG_' + i].items():
+                self.configu_block_info_dict["CFG_" + i + ":" + key] = value
+                if self.verbosity.value > Verbosity.HIGH.value:
+                    print(key, value)
+
+        # get actual data info
+
 
 
 

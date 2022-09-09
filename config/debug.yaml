@@ -29,6 +29,8 @@ SDCARD_SETUP:
   NUM_BYTES_DB_0        : 8
   # number of bytes needed to be read in from that sd card block
 
+# CFG_0: # IF THERE IS CONFIGURATION DATA BLOCKS ON SD CARD
+
 DB_0:
   BYTE_0    : "BYTE_0_IN"
   BYTE_1    : "BYTE_1_IN"
