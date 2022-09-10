@@ -28,6 +28,10 @@ SDCARD_SETUP:
   # number of blocks per data point 1 - inf
   NUM_BYTES_DB_0        : 8
   # number of bytes needed to be read in from that sd card block
+  NUM_DB_MATH_BLOCKS    : 1
+  # set number of DB_MATH BLOCKS...usually should be one
+  NUM_CFG_MATH_BLOCKS   : 0
+  # set number of CFG MATH BLOCKS...usually 0 or 1
 
 # CFG_0: # IF THERE IS CONFIGURATION DATA BLOCKS ON SD CARD
 
@@ -41,7 +45,9 @@ DB_0:
   BYTE_6    : "BYTE_6_IN"
   BYTE_7    : "BYTE_7_IN"
 
-DB_MATH:
+# CFG_MATH_0: # IF THERE IS CONFIGURATION MATH THAT IS NEEDED TO BE DONE
+
+DB_MATH_0:
   COL0_OUT : "+,BYTE_0_IN,BYTE_7_IN"
   COL1_OUT : "-,BYTE_1_IN,BYTE_6_IN"
   COL2_OUT : "*,(>>4,BYTE_4_IN),BYTE_3_IN"
