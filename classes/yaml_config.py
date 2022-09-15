@@ -1,4 +1,5 @@
 import yaml
+import sys
 from verbosity import *
 class YamlConfig():
 
@@ -43,7 +44,24 @@ class YamlConfig():
                 print(key, value)
 
         # check to make sure necessary items were set in the yaml config file
-        # TODO WRITE IFS
+        if not ("IMAGE_DATA" in self.sd_card_setup_dict):
+            print("FATAL: IMAGE_DATA not found in sd_card_setup_dict")
+            sys.exit()
+        if not ("DATA_POINTS_IN_CONFIG" in self.sd_card_setup_dict):
+            print("FATAL: DATA_POINTS_IN_CONFIG not found in sd_card_setup_dict")
+            sys.exit()
+        if not ("NUM_CONFIG_BLOCKS" in self.sd_card_setup_dict):
+            print("FATAL: NUM_CONFIG_BLOCKS not found in sd_card_setup_dict")
+            sys.exit()
+        if not ("NUM_DATA_BLOCKS" in self.sd_card_setup_dict):
+            print("FATAL: NUM_DATA_BLOCKS not found in sd_card_setup_dict")
+            sys.exit()
+        if not ("NUM_BYTES_DB_0" in self.sd_card_setup_dict):
+            print("FATAL: NUM_BYTES_DB_0 not found in sd_card_setup_dict")
+            sys.exit()
+        if not ("NUM_DB_MATH_BLOCKS" in self.sd_card_setup_dict):
+            print("FATAL: NUMCFG_MATH_BLOCKS not found in sd_card_setup_dict")
+            sys.exit()
 
         # get configuration data info
         if self.verbosity.value > Verbosity.HIGH.value:

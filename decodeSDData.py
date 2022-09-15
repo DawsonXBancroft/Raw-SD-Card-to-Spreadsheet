@@ -1,6 +1,8 @@
 # @author: DawsonXBancroft
-# example use:
+# example use WINDOWS:
 # python decodeSDData.py -type DEBUG -inputfile .\ExampleInput\210708_FLIGHT_DATAONLY_LORA_ONLY.txt -verbosity DEBUG
+# example use LINUX:
+# python decodeSDData.py -type DEBUG -inputfile ExampleInput/210708_FLIGHT_DATAONLY_LORA_ONLY.txt -verbosity DEBUG
 import sys
 sys.path.append('classes/')
 # User defined classes
