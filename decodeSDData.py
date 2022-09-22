@@ -21,7 +21,10 @@ def __main__():
     yaml_cfg.readInConfig()
 
     # IF CONFIG DATA READ THAT IN (MAY CONTAIN # OF DATA POINTS)
-
+    if (yaml_cfg.sd_card_setup_dict["DATA_POINTS_IN_CONFIG"] == True):
+        num_items = yaml_cfg.math_config_dict["DATAPOINTS"]
+    else:
+        num_items = cmd_cfg.datapoints
 
     # READ IN DATA
 

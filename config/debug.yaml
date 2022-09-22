@@ -20,7 +20,7 @@ SDCARD_SETUP:
   # only accepts true or false (hasn't been tested)
   DATA_POINTS_IN_CONFIG : False
   # only accepts true or false (hasn't been tested)
-  # IF TRUE CFG_0 NEEDS TO HAVE A LABEL "DATAPOINTS"
+  # IF TRUE CFG_MATH_0 NEEDS TO HAVE A LABEL "DATAPOINTS"
   NUM_CONFIG_BLOCKS     : 0
   # number of configuration blocks at beginning of sd card
   # 0 - inf (typically has number of data points) needs to be set to int
@@ -33,7 +33,7 @@ SDCARD_SETUP:
   NUM_CFG_MATH_BLOCKS   : 0
   # set number of CFG MATH BLOCKS...usually 0 or 1
 
-# CFG_0: # IF THERE IS CONFIGURATION DATA BLOCKS ON SD CARD
+CFG_0: # IF THERE IS CONFIGURATION DATA BLOCKS ON SD CARD
 
 DB_0:
   BYTE_0    : "BYTE_0_IN"
@@ -45,7 +45,7 @@ DB_0:
   BYTE_6    : "BYTE_6_IN"
   BYTE_7    : "BYTE_7_IN"
 
-# CFG_MATH_0: # IF THERE IS CONFIGURATION MATH THAT IS NEEDED TO BE DONE
+CFG_MATH_0: # IF THERE IS CONFIGURATION MATH THAT IS NEEDED TO BE DONE
 
 DB_MATH_0:
   COL0_OUT : "+,BYTE_0_IN,BYTE_7_IN"

@@ -11,6 +11,9 @@ class YamlConfig():
     config_block_info_dict = {}
     data_block_info_dict = {}
 
+    math_config_dict = {}
+    math_data_dict = {}
+
 
     # When constructed, the config_file_path is required
     def __init__(self, config_file_path, verbosity):

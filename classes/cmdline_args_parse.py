@@ -8,6 +8,7 @@ class CMDLineParser:
         self.input_file_path = "null"
         self.config_file_path = "null"
         self.output_file_path = "null"
+        self.datapoints = 0
         self.gui = False
         self.usage = "Usage: main.py [-inputfile <PATH> -type <{DEBUG, NO_ATTACH, NEMO}> [-outputfile <PATH>] [-verb" \
             "osity [<LOW, MEDIUM, HIGH, DEBUG}>]] || [-gui]] "
@@ -55,6 +56,9 @@ class CMDLineParser:
                 else:
                     self.output_file_path = args[i + 1]
                     i = i + 1
+            elif args[i] == "-datapoints":
+                self.datapoints = args[i + 1]
+                i = i + 1
             elif args[i] == "-type":
                 if args[i + 1].upper() == "DEBUG":
                     self.config_file_path = "config/debug.yaml"
@@ -72,6 +76,7 @@ class CMDLineParser:
             print("    input file    : " + self.input_file_path)
             print("    output file   : " + self.output_file_path)
             print("    type          : " + self.config_file_path)
+            print("    datapoints    : " + str(self.datapoints))
             print()
 
         if not self.gui:
