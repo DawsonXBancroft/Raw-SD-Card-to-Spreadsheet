@@ -1,3 +1,4 @@
+# @author: DawsonXBancroft
 import os.path
 import sys
 from verbosity import *

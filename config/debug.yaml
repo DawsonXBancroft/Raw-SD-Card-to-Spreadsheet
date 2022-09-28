@@ -1,3 +1,4 @@
+# @author: DawsonXBancroft
 APP:
   VERBOSITY: "DEBUG"
   # Only accepts LOW, MEDIUM, HIGH, or DEBUG (hasn't been tested yet)

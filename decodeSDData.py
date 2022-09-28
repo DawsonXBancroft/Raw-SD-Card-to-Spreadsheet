@@ -9,6 +9,7 @@ sys.path.append('classes/')
 from yaml_config import *
 from verbosity import *
 from cmdline_args_parse import *
+from csv_writer import *
 
 
 def __main__():
@@ -17,7 +18,9 @@ def __main__():
     cmd_cfg.parse()
 
     # READ IN YAML (config) FILE
-    yaml_cfg = YamlConfig(cmd_cfg.config_file_path, cmd_cfg.verbosity)
+    yaml_cfg = YamlConfig()
+    yaml_cfg.config_file_path = cmd_cfg.config_file_path
+    yaml_cfg.verbosity = cmd_cfg.verbosity
     yaml_cfg.readInConfig()
 
     # IF CONFIG DATA READ THAT IN (MAY CONTAIN # OF DATA POINTS)
@@ -32,6 +35,12 @@ def __main__():
 
     # READ IN DATA AND SEND IT TO THE CSV WRITER
 
+        # FIRST CREATE THE CSV WRITER
+    csv_w = CSVWriter()
+    csv_w.verbosity = cmd_cfg.verbosity
+    csv_w.output_file_path = cmd_cfg.output_file_path
+    csv_w.openCSVFile()
+    csv_w.writeHeaders(list(yaml_cfg.col_labels_dict.values()))
 
 
 __main__()

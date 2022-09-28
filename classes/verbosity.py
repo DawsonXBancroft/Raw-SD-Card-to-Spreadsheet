@@ -1,3 +1,4 @@
+# @author: DawsonXBancroft
 from enum import Enum
 class Verbosity(Enum):
     LOW = 1

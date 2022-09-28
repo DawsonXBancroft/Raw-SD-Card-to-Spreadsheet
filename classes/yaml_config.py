@@ -1,24 +1,23 @@
+# @author: DawsonXBancroft
 import yaml
 import sys
 from verbosity import *
 class YamlConfig():
 
     # Class for holding configuration of SD Card and CSV file
-    config_file_path = "null"
-    col_labels_dict = {}
-    col_vars_dict = {}
-    sd_card_setup_dict = {}
-    config_block_info_dict = {}
-    data_block_info_dict = {}
-
-    math_config_dict = {}
-    math_data_dict = {}
 
 
     # When constructed, the config_file_path is required
-    def __init__(self, config_file_path, verbosity):
-        self.config_file_path = config_file_path
-        self.verbosity = verbosity
+    def __init__(self):
+        self.config_file_path = "null"
+        self.verbosity = Verbosity.MEDIUM
+        self.col_labels_dict = {}
+        self.col_vars_dict = {}
+        self.sd_card_setup_dict = {}
+        self.config_block_info_dict = {}
+        self.data_block_info_dict = {}
+        self.math_config_dict = {}
+        self.math_data_dict = {}
 
     def readInConfig(self):
         # get column labels (column headers for csv file)
