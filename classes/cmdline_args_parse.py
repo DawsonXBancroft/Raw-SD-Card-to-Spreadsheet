@@ -11,8 +11,8 @@ class CMDLineParser:
         self.output_file_path = "null"
         self.datapoints = 0
         self.gui = False
-        self.usage = "Usage: main.py [-inputfile <PATH> -type <{DEBUG, NO_ATTACH, NEMO}> [-outputfile <PATH>] [-verb" \
-            "osity [<LOW, MEDIUM, HIGH, DEBUG}>]] || [-gui]] "
+        self.usage = "Usage: main.py -inputfile <PATH> -type <{DEBUG, NO_ATTACH, NEMO}> [-outputfile <PATH>] [-verb" \
+            "osity [<LOW, MEDIUM, HIGH, DEBUG}>] [-gui]] "
 
     def parse(self):
         args = sys.argv[1:]
