@@ -23,10 +23,15 @@ def __main__():
     # IF CONFIG DATA READ THAT IN (MAY CONTAIN # OF DATA POINTS)
     if (yaml_cfg.sd_card_setup_dict["DATA_POINTS_IN_CONFIG"] == True):
         num_items = yaml_cfg.math_config_dict["DATAPOINTS"]
+        if cmd_cfg.verbosity.value > Verbosity.HIGH.value:
+            print("\nValue taken from config file to be on SD Card\n")
     else:
         num_items = cmd_cfg.datapoints
+        if cmd_cfg.verbosity.value > Verbosity.HIGH.value:
+            print("\nValue taken from command line to be " + cmd_cfg.datapoints + "\n")
 
-    # READ IN DATA
+    # READ IN DATA AND SEND IT TO THE CSV WRITER
+
 
 
 __main__()

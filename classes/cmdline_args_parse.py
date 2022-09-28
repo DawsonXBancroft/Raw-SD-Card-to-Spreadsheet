@@ -70,7 +70,7 @@ class CMDLineParser:
                 self.gui = True
 
         if self.verbosity.value > Verbosity.HIGH.value:
-            print("END OF PARSING ARGUMENTS")
+            print("\nEND OF PARSING ARGUMENTS")
             print("    verbosity     : " + self.verbosity.name)
             print("    gui           : " + str(self.gui))
             print("    input file    : " + self.input_file_path)
