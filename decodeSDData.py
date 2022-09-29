@@ -42,5 +42,7 @@ def __main__():
     csv_w.openCSVFile()
     csv_w.writeHeaders(list(yaml_cfg.col_labels_dict.values()))
 
+    # CLOSE ALL OPEN FILES
+    csv_w.closeCSVFile()
 
 __main__()
