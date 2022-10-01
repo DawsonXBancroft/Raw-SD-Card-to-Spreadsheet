@@ -1,8 +1,32 @@
+# MIT License
+#
+# Copyright (c) 2022 SD Card Coverter
+#
+# Permission is hereby granted, free of charge, to any person obtaining
+# a copy of this software and associated documentation files (the
+# "Software"), to deal in the Software without restriction, including
+# without limitation the rights to use, copy, modify, merge, publish,
+# distribute, sublicense, and/or sell copies of the Software, and to
+# permit persons to whom the Software is furnished to do so, subject to
+# the following conditions:
+#
+# The above copyright notice and this permission notice shall be
+# included in all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+# IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+# CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+# TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+# SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+#
 # @author: DawsonXBancroft
 # example use WINDOWS:
 # python decodeSDData.py -type DEBUG -inputfile .\ExampleInput\210708_FLIGHT_DATAONLY_LORA_ONLY.txt -verbosity DEBUG
 # example use LINUX:
 # python decodeSDData.py -type DEBUG -inputfile ExampleInput/210708_FLIGHT_DATAONLY_LORA_ONLY.txt -verbosity DEBUG
+
 import sys
 sys.path.append('classes/')
 # User defined classes
@@ -10,6 +34,7 @@ from yaml_config import *
 from verbosity import *
 from cmdline_args_parse import *
 from csv_writer import *
+from raw_reader import *
 
 
 def __main__():
@@ -35,14 +60,25 @@ def __main__():
 
     # READ IN DATA AND SEND IT TO THE CSV WRITER
 
-        # FIRST CREATE THE CSV WRITER
+        # CREATE THE READER
+    raw_r = RawReader()
+    raw_r.verbosity = cmd_cfg.verbosity
+    raw_r.input_file_path = cmd_cfg.input_file_path
+    raw_r.openFile()
+
+        # CREATE THE CSV WRITER
     csv_w = CSVWriter()
     csv_w.verbosity = cmd_cfg.verbosity
     csv_w.output_file_path = cmd_cfg.output_file_path
     csv_w.openCSVFile()
     csv_w.writeHeaders(list(yaml_cfg.col_labels_dict.values()))
 
+    raw_r.readBlock()
+
+
+    print()
     # CLOSE ALL OPEN FILES
+    raw_r.closeFile()
     csv_w.closeCSVFile()
 
 __main__()
