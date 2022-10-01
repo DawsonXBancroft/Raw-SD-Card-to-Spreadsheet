@@ -77,13 +77,37 @@ class RawReader:
 
         # generate a new transaction
         trx = Transaction()
-        line = self.f.readline()
-        trx.verbosity = self.verbosity
 
+        # get first pointer for beginning of file
+        lastLinePtr = self.f.tell()
+        lastLine_address = 0
+
+        for i in range(20): # 20 lines per block default
+
+            # read in line
+            line = self.f.readline()
+
+            # break line up, delimited by spaces
+            line_chunks = line.split(' ')
+
+            # if line chunks 0 == * read the next line after
+            if line_chunks[0] == '*':
+                nextLine = self.f.readline()
+                nextLine_chunks = nextLine.split(' ')
+                nextLine_address = int(nextLine_chunks)
+            else:
+
+
+        # line = self.f.readline()
+        # print(line)
+        # trx.verbosity = self.verbosity
+
+        # self.f.seek(lastLinePtr, 0)
+        # print(line)
 
 
         # if verbosity is greater than HIGH print out debug info
         if self.verbosity.value > Verbosity.HIGH.value:
-            print("\n\nRawReader read this line: " + line +
+            print("\n\nRawReader read this block: " +
                   "\nand generated this transaction:" + trx.convert2string())
         return trx
