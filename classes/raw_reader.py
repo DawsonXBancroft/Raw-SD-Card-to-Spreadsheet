@@ -96,6 +96,10 @@ class RawReader:
                         self.f.seek(lastLinePtr, 0)
                         tempLine = self.f.readline()
 
+                        lineDelta = (nextLine_address - actualAddress) / 16
+
+                        # ADD IN ADRESS COUNTER TO ADD TO i, j, and k to match the next level
+
                     else:
                         actualAddress = int(line_chunks[0], 16)
                         if self.verbosity.value > Verbosity.HIGH.value:
@@ -104,10 +108,7 @@ class RawReader:
                             print("actualAddress   = " + str(actualAddress))
                             print("\n")
 
-
-
                         expectedAddress = expectedAddress + 16
-
 
             # perform math
 
