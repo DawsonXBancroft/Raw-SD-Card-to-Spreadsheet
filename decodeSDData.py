@@ -64,6 +64,8 @@ def __main__():
     raw_r = RawReader()
     raw_r.verbosity = cmd_cfg.verbosity
     raw_r.input_file_path = cmd_cfg.input_file_path
+    raw_r.cfg = yaml_cfg
+    raw_r.datapoints = num_items
     raw_r.openFile()
 
         # CREATE THE CSV WRITER
@@ -73,7 +75,11 @@ def __main__():
     csv_w.openCSVFile()
     csv_w.writeHeaders(list(yaml_cfg.col_labels_dict.values()))
 
-    raw_r.readBlock()
+        # SET CSV WRITER TO
+    raw_r.writer = csv_w
+
+        # READ FILE
+    raw_r.readFile()
 
 
     print()

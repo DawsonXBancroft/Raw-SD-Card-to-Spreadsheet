@@ -20,7 +20,6 @@ SDCARD_SETUP:
   IMAGE_DATA            : False
   # only accepts true or false (hasn't been tested)
   DATA_POINTS_IN_CONFIG : False
-  # only accepts true or false (hasn't been tested)
   # IF TRUE CFG_MATH_0 NEEDS TO HAVE A LABEL "DATAPOINTS"
   NUM_CONFIG_BLOCKS     : 0
   # number of configuration blocks at beginning of sd card
