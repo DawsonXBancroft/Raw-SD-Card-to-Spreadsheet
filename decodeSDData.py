@@ -78,8 +78,8 @@ def __main__():
         # SET CSV WRITER TO
     raw_r.writer = csv_w
 
-        # READ FILE
-    raw_r.readFile()
+        # READER START
+    raw_r.readStart()
 
 
     print()

@@ -49,6 +49,7 @@ class RawReader:
         if self.verbosity.value > Verbosity.HIGH.value:
             print("Closed file: " + self.input_file_path)
 
+    """
     def readFile(self):
         # check to see if file is open
         if self.f == "null":
@@ -67,7 +68,9 @@ class RawReader:
             # get blocks
             print("getting block " + i)
 
-        # read in data actual
+        # read in data actual (i iterator for datapoints, j iterator through number of data blocks per datapoint
+        # k iterator through lines of data per block)
+        lineDelta = 0
         for i in range(int(self.datapoints)):
             for j in range(self.cfg.sd_card_setup_dict["NUM_DATA_BLOCKS"]):
                 for k in range(20): # 20 lines per block default
@@ -81,12 +84,11 @@ class RawReader:
 
                     # if line chunks 0 == * read the next line after
                     if line_chunks[0] == "*\n":
-                        # nextLine = self.f.readline()
-                        # nextLine_chunks = nextLine.split(' ')
-                        # nextLine_address = int(nextLine_chunks, 16)
                         if self.verbosity.value > Verbosity.HIGH.value:
                             print("detected a *\n") # debug testing
+                        # Split the line into chunks
                         nextLine_chunks = "*\n".split(' ')
+                        # Keep checking the next line incase there are multiple *
                         while (nextLine_chunks[0] == "*\n"):
                             nextLine = self.f.readline()
                             nextLine_chunks = nextLine.split(' ')
@@ -99,6 +101,13 @@ class RawReader:
                         lineDelta = (nextLine_address - actualAddress) / 16
 
                         # ADD IN ADRESS COUNTER TO ADD TO i, j, and k to match the next level
+                        #for l in range(lineDelta):
+                        #    if l >= k:
+                        #        l =
+                        while lineDelta > 0:
+
+
+
 
                     else:
                         actualAddress = int(line_chunks[0], 16)
@@ -126,3 +135,22 @@ class RawReader:
             print("\n\nRawReader read this block: " +
                   "\nand generated this transaction:" + trx.convert2string())
         return trx
+    """
+
+    def readStart(self):
+        self.readBlock(0)
+
+    def readBlock(self, begin_address):
+        # check to see if file is open
+        if self.f == "null":
+            print("\nFATAL: FILE NOT OPEN, PLEASE OPEN THE FILE BEFORE CLOSING IT")
+            sys.exit()
+
+        # generate a new transaction
+        trx = Transaction()
+
+        # get first pointer for beginning of file
+        lastLinePtr = self.f.tell()
+
+        line = self.f.readline()
+
