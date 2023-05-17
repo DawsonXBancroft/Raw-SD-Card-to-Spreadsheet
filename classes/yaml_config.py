@@ -67,7 +67,7 @@ class YamlConfig():
         for key, value in yaml.safe_load(open(self.config_file_path))['SDCARD_SETUP'].items():
             self.sd_card_setup_dict[key] = value
             if self.verbosity.value > Verbosity.HIGH.value:
-                print("\t" + str(key) + "\t" + str(value))
+                print("\t" + str(key) + "   \t" + str(value))
 
         # check to make sure necessary items were set in the yaml config file
         if not ("IMAGE_DATA" in self.sd_card_setup_dict):
