@@ -63,13 +63,21 @@ class RawReader:
             sys.exit()
 
         # generate a new transaction
-        trx = Transaction()
+        block = Transaction()
+        block.block_number = block_number
 
         # seek to the block_number
-        self.f.seek((block_number*78*32), 0) # 78 is # of chars, next 32 is number of lines
+        self.f.seek((block_number*79*32), 0) # 79 is # of chars, next 32 is number of lines
 
-        line = self.f.readline()
-
-        for i in range(31): # number of lines in a SD card readBlock
+        for i in range(32): # number of lines in a SD card readBlock
             line = self.f.readline() # read the line
-            # print(line) debug statement
+            #print(line) # debug statement
+
+            # parse lines
+            par_line = line.split( )
+
+            # stuff data in the transaction
+            for i in range(16):
+                block.values.append(par_line[i+1])
+
+        return block

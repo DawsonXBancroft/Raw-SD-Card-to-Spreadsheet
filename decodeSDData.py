@@ -35,6 +35,7 @@ from verbosity import *
 from cmdline_args_parse import *
 from csv_writer import *
 from raw_reader import *
+from transaction import *
 
 
 def __main__():
@@ -56,7 +57,7 @@ def __main__():
     else:
         num_items = cmd_cfg.datapoints
         if cmd_cfg.verbosity.value > Verbosity.HIGH.value:
-            print("\nValue taken from command line to be " + cmd_cfg.datapoints + "\n")
+            print("\nValue taken from command line to be " + str(cmd_cfg.datapoints) + "\n")
 
     # READ IN DATA AND SEND IT TO THE CSV WRITER
 
@@ -79,7 +80,30 @@ def __main__():
     raw_r.writer = csv_w
 
         # READER START
-    raw_r.readStart()
+    # print(len(yaml_cfg.config_block_info_dict)) # debug
+    # print(len(yaml_cfg.data_block_info_dict))   # debug
+
+    # create transaction to be used to print data
+    this_block = Transaction()
+
+    # keep track of current data block
+    block_num = 0
+
+    # read config blocks
+    for i in range(len(yaml_cfg.config_block_info_dict)):
+        this_block = raw_r.readBlock(block_num)
+
+        # do math and add data to a dictionary if necessary
+
+        block_num = block_num + 1
+
+
+    # read data blocks
+    for i in range(cmd_cfg.datapoints):
+        for j in range(len(yaml_cfg.data_block_info_dict)):
+            this_block = raw_r.readBlock(block_num)
+
+            block_num
 
 
     print()

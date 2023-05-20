@@ -81,7 +81,7 @@ class CMDLineParser:
                     self.output_file_path = args[i + 1]
                     i = i + 1
             elif args[i] == "-datapoints":
-                self.datapoints = args[i + 1]
+                self.datapoints = int(args[i + 1])
                 i = i + 1
             elif args[i] == "-type":
                 if args[i + 1].upper() == "DEBUG":

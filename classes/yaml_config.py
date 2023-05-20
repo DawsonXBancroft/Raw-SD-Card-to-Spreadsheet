@@ -41,6 +41,8 @@ class YamlConfig():
         self.data_block_info_dict = {}
         self.math_config_dict = {}
         self.math_data_dict = {}
+        self.num_data_blocks = 0
+        self.num_config_blocks = 0
 
     def readInConfig(self):
         # get column labels (column headers for csv file)
@@ -115,8 +117,6 @@ class YamlConfig():
         # print out that the yaml database is completely read if verbosity is high enough
         if self.verbosity.value > Verbosity.HIGH.value:
             print("\nYAML file read in completely\n")
-
-
 
 
 
