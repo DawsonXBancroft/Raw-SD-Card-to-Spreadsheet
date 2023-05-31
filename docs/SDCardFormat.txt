@@ -1,0 +1,12 @@
+SD Card Formatting
+
+This is made for raw data written to an SD Card by an small embedded system.
+Usually, these systems are too small to have a FAT32 filesystem on the SD Card.
+
+
+SD Card Formatting:
+
+The block size should be 512 bytes. 
+
+You have the ability to put a few configuration blocks in the first few blocks of the SD card. 
+All blocks after that should be data blocks.

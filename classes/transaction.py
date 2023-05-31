@@ -27,14 +27,14 @@ class Transaction:
 
     def __init__(self):
         self.verbosity = Verbosity.MEDIUM
-        self.base_address = 0
+        self.block_number = 0
         self.values = []
 
     def convert2string(self):
         s = ""
-        s = s + "\nTransaction Print:\n"
+        s = s + "\nTransaction Print:"
         s = s + "\n\tverbosity = " + str(self.verbosity)
-        s = s + "\n\tbase_addr = " + str(self.base_address)
+        s = s + "\n\tblock_num = " + str(self.block_number)
         s = s + "\n\tvalues    = " + str(self.values)
         return s
 

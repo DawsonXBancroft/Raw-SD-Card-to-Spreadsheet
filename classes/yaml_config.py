@@ -92,6 +92,8 @@ class YamlConfig():
             sys.exit()
 
         # get configuration data info
+        self.num_config_blocks = self.sd_card_setup_dict["NUM_CONFIG_BLOCKS"]
+
         if self.verbosity.value > Verbosity.HIGH.value:
             print("\nGetting " + str(self.sd_card_setup_dict["NUM_CONFIG_BLOCKS"]) + " Config Data Blocks Info")
         for i in range(self.sd_card_setup_dict["NUM_CONFIG_BLOCKS"]):
@@ -103,6 +105,8 @@ class YamlConfig():
                     print("\t" + str(key) + "\t" + str(value))
 
         # get actual data info
+        self.num_data_blocks = self.sd_card_setup_dict["NUM_DATA_BLOCKS"]
+
         if self.verbosity.value > Verbosity.HIGH.value:
             print("\nGetting " + str(self.sd_card_setup_dict["NUM_DATA_BLOCKS"]) + " Data Blocks Info")
         for i in range(self.sd_card_setup_dict["NUM_DATA_BLOCKS"]):

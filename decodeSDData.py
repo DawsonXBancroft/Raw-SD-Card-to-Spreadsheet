@@ -31,6 +31,7 @@ import sys
 sys.path.append('classes/')
 # User defined classes
 from yaml_config import *
+from yaml_math import *
 from verbosity import *
 from cmdline_args_parse import *
 from csv_writer import *
@@ -48,6 +49,9 @@ def __main__():
     yaml_cfg.config_file_path = cmd_cfg.config_file_path
     yaml_cfg.verbosity = cmd_cfg.verbosity
     yaml_cfg.readInConfig()
+
+    # INITIALIZE YAML MATH
+    yaml_math = YamlMath()
 
     # IF CONFIG DATA READ THAT IN (MAY CONTAIN # OF DATA POINTS)
     if (yaml_cfg.sd_card_setup_dict["DATA_POINTS_IN_CONFIG"] == True):
@@ -90,7 +94,7 @@ def __main__():
     block_num = 0
 
     # read config blocks
-    for i in range(len(yaml_cfg.config_block_info_dict)):
+    for i in range(yaml_cfg.num_config_blocks):
         this_block = raw_r.readBlock(block_num)
 
         # do math and add data to a dictionary if necessary
@@ -100,10 +104,12 @@ def __main__():
 
     # read data blocks
     for i in range(cmd_cfg.datapoints):
-        for j in range(len(yaml_cfg.data_block_info_dict)):
+        for j in range(yaml_cfg.num_data_blocks):
             this_block = raw_r.readBlock(block_num)
 
-            block_num
+            # print(this_block.convert2string())
+            yaml_math.add_to_block_array(this_block)
+            block_num = block_num + 1
 
 
     print()
