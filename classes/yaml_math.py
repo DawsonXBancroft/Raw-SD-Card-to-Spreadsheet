@@ -58,6 +58,7 @@ class YamlMath:
             if self.verbosity.value > Verbosity.HIGH.value:
                 print("\nDetected " + str(len(self.block_arr)) + " blocks of actual data.\n")
             for i in range(len(self.block_arr)):
+
                 for j in range(len(self.yaml_cfg.math_data_dict)):
                     string_temp = "DB_" + i + ":BYTE_" + j
                     if string_temp in self.yaml_cfg.math_config_block_info_dict.keys():

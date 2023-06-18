@@ -52,6 +52,7 @@ def __main__():
 
     # INITIALIZE YAML MATH
     yaml_math = YamlMath()
+    yaml_math.yaml_cfg = yaml_cfg
     yaml_math.verbosity = cmd_cfg.verbosity
 
     # IF CONFIG DATA READ THAT IN (MAY CONTAIN # OF DATA POINTS)
@@ -62,7 +63,7 @@ def __main__():
     else:
         num_items = cmd_cfg.datapoints
         if cmd_cfg.verbosity.value > Verbosity.HIGH.value:
-            print("\nValue taken from command line to be " + str(cmd_cfg.datapoints) + "\n")
+            print("\nNumber datapoints value taken from command line to be " + str(cmd_cfg.datapoints) + "\n")
 
     # READ IN DATA AND SEND IT TO THE CSV WRITER
 

@@ -118,6 +118,17 @@ class YamlConfig():
                     print("\t" + "DB_" + str(i) + ":" + key + "\t" + str(value))
 
 
+        # get config math blocks
+        if self.verbosity.value > Verbosity.HIGH.value:
+            print("\nGetting" + str(self.sd_card_setup_dict["NUM_CFG_MATH_BLOCKS"]) + " Config Math")
+        for i in range(self.sd_card_setup_dict["NUM_CFG_MATH_BLOCKS"]):
+            if self.verbosity.value > Verbosity.HIGH.value:
+                print("\nReading MATH_CFG_" + str(i))
+            for key, value in yaml.safe_load(open(self.config_file_path))['DB_MATH_' + str(i)].items():
+                self.
+
+        # get actual data math blocks
+
         # print out that the yaml database is completely read if verbosity is high enough
         if self.verbosity.value > Verbosity.HIGH.value:
             print("\nYAML file read in completely\n")
