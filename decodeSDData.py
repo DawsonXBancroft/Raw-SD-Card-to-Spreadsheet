@@ -52,6 +52,7 @@ def __main__():
 
     # INITIALIZE YAML MATH
     yaml_math = YamlMath()
+    yaml_math.verbosity = cmd_cfg.verbosity
 
     # IF CONFIG DATA READ THAT IN (MAY CONTAIN # OF DATA POINTS)
     if (yaml_cfg.sd_card_setup_dict["DATA_POINTS_IN_CONFIG"] == True):
@@ -110,7 +111,7 @@ def __main__():
             # print(this_block.convert2string())
             yaml_math.add_to_block_array(this_block)
             block_num = block_num + 1
-
+        yaml_math.do_math()
 
     print()
     # CLOSE ALL OPEN FILES

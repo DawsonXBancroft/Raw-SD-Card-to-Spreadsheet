@@ -33,7 +33,8 @@ class YamlMath:
         self.block_arr = []
         self.yaml_cfg = YamlConfig()
         self.config_data = []
-        self.config_dic = {}
+        self.config_dict = {}
+        self.data_dict = {}
 
     def do_config_math(self):
         if len(block_arr) == 0:
@@ -41,20 +42,34 @@ class YamlMath:
                 print("\nNo blocks added for the config. Skipping config data (if any)\n")
         else:
             if self.verbosity.value > Verbosity.HIGH.value:
-                print("\nDetected " + str(len(block_arr)) + " blocks of config data.\n")
+                print("\nDetected " + str(len(self.block_arr)) + " blocks of config data.\n")
             for i in range(len(block_arr)):
-                # for each block
-                    # for each item in the dictionary
-                        # make an entry in this diectionary with the configuration data
+                for j in range(len(yaml_cfg.math_config_dict)):
+                    string_temp = "CFG_" + i + ":BYTE_" + j
+                    if string_temp in yaml_cfg.math_config_block_info_dict.keys():
+                        config_dict[yaml_cfg.math_config_block_info_dict[string_temp]] = block.values[j]
         # calculate the config data and store it
+
+    def do_math(self):
+        if len(self.block_arr) == 0:
+            if self.verbosity.value > Verbosity.HIGH.value:
+                print("\nERROR: No blocks added for this data math.\n")
+        else:
+            if self.verbosity.value > Verbosity.HIGH.value:
+                print("\nDetected " + str(len(self.block_arr)) + " blocks of actual data.\n")
+            for i in range(len(self.block_arr)):
+                for j in range(len(self.yaml_cfg.math_data_dict)):
+                    string_temp = "DB_" + i + ":BYTE_" + j
+                    if string_temp in self.yaml_cfg.math_config_block_info_dict.keys():
+                        self.data_dict[self.yaml_cfg.math_data_block_info_dict[string_temp]] = block.values[j]
+        # perform math
+        print(len(self.block_arr))
+        print(self.config_dict)
+        # empty the array
+        self.block_arr.clear()
 
     def add_to_block_array(self, block):
         self.block_arr.append(block)
         #print(self.block_arr[-1].block_number)
 
-   # def do_math(self):
-        # check if block array is empty
 
-        # perform math
-
-        # empty the array
