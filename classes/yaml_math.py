@@ -55,25 +55,36 @@ class YamlMath:
             if self.verbosity.value > Verbosity.HIGH.value:
                 print("\nERROR: No blocks added for this data math.\n")
         else:
-            temp_dict = {}
             if self.verbosity.value > Verbosity.HIGH.value:
                 print("\nDetected " + str(len(self.block_arr)) + " blocks of actual data.\n")
             #for i in range(len(self.block_arr)):
             for i in range(self.yaml_cfg.num_data_blocks):
                 for j in range(self.yaml_cfg.sd_card_setup_dict["NUM_BYTES_DB_" + str(i)]):
-                    temp_dict[self.yaml_cfg.data_block_info_dict["DB_" + str(i) + "_BYTE_" + str(j)]] = int(self.block_arr[i].values[j], 16)
-
-
+                    self.data_dict[self.yaml_cfg.data_block_info_dict["DB_" + str(i) + "_BYTE_" + str(j)]] = int(self.block_arr[i].values[j], 16)
         # perform math
-        print(len(self.block_arr))
-        print(self.config_dict)
-        print(temp_dict)
+        for col_values in self.yaml_cfg.col_vars_dict.values():
+            self.evaluate_expression(self.yaml_cfg.math_data_dict[col_values])
 
-        # empty the array
+
+        # empty the array and dictionary
         self.block_arr.clear()
+        self.data_dict.clear()
 
     def add_to_block_array(self, block):
         self.block_arr.append(block)
-        #print(self.block_arr[-1].block_number)
 
+    def evaluate_expression(self, expressionIn):
+        if '(' in expressionIn:
+            if ')' in expressionIn:
+                expressionRecurse = expressionIn[expressionIn.find("(")+1:]
+                flipped_expression = "".join(reversed(expressionRecurse))
+                flipped_expression = flipped_expression[flipped_expression.find(")")+1:]
+                expressionRecurse = "".join(reversed(flipped_expression))
+                temp_num = self.evaluate_expression(expressionRecurse)
+            else:
+                print("\nFATAL: \'(\' FOUND BUT \')\' IS NOT FOUND, CHECK THE YAML CONFIG")
+                sys.exit()
+        elif ')' in expressionIn:
+            print("\nFATAL: \')\' FOUND BUT EXPECTING \'(\' AS WELL, CHECK YAML CONFIG")
+            sys.exit()
 
