@@ -24,6 +24,7 @@
 # @author: DawsonXBancroft
 import sys
 from transaction import *
+from csv_writer import *
 from yaml_config import *
 from verbosity import *
 class YamlMath:
@@ -35,6 +36,7 @@ class YamlMath:
         self.config_data = []
         self.config_dict = {}
         self.data_dict = {}
+        self.csv_w = CSVWriter()
 
     def do_config_math(self):
         if len(block_arr) == 0:
@@ -62,9 +64,10 @@ class YamlMath:
                 for j in range(self.yaml_cfg.sd_card_setup_dict["NUM_BYTES_DB_" + str(i)]):
                     self.data_dict[self.yaml_cfg.data_block_info_dict["DB_" + str(i) + "_BYTE_" + str(j)]] = int(self.block_arr[i].values[j], 16)
         # perform math
+        final_values = []
         for col_values in self.yaml_cfg.col_vars_dict.values():
-            self.evaluate_expression(self.yaml_cfg.math_data_dict[col_values])
-
+            final_values.append(self.evaluate_expression(self.yaml_cfg.math_data_dict[col_values]))
+        self.csv_w.writeData(final_values)
 
         # empty the array and dictionary
         self.block_arr.clear()
@@ -80,7 +83,7 @@ class YamlMath:
                 flipped_expression = "".join(reversed(expressionRecurse))
                 flipped_expression = flipped_expression[flipped_expression.find(")")+1:]
                 expressionRecurse = "".join(reversed(flipped_expression))
-                temp_num = self.evaluate_expression(expressionRecurse)
+                return self.evaluate_expression(expressionRecurse)
             else:
                 print("\nFATAL: \'(\' FOUND BUT \')\' IS NOT FOUND, CHECK THE YAML CONFIG")
                 sys.exit()
@@ -153,7 +156,29 @@ class YamlMath:
                     operand2 = float(self.data_dict[split_expression[2]])
                 return (operand1 / operand2)
             elif "<<" in expressionIn:
-
+                split_expression = expressionIn[expressionIn.find("<<")+2:]
+                split_expression = split_expression.split(",")
+                if self.is_number(split_expression[0]):
+                    operator = int(split_expression[0])
+                else:
+                    operator = int(self.data_dict[split_expression[0]])
+                if self.is_number(split_expression[1]):
+                    operand = float(split_expression[1])
+                else:
+                    operand = float(self.data_dict[split_expression[1]])
+                return 3 # (operand << operator)
+            elif ">>" in expressionIn:
+                split_expression = expressionIn[expressionIn.find(">>")+2:]
+                split_expression = split_expression.split(",")
+                if self.is_number(split_expression[0]):
+                    operator = int(split_expression[0])
+                else:
+                    operator = int(self.data_dict[split_expression[0]])
+                if self.is_number(split_expression[1]):
+                    operand = float(split_expression[1])
+                else:
+                    operand = float(self.data_dict[split_expression[1]])
+                return 4 # (operand >> operator)
 
     def is_number(self, num):
         try:

@@ -81,6 +81,7 @@ def __main__():
     csv_w.output_file_path = cmd_cfg.output_file_path
     csv_w.openCSVFile()
     csv_w.writeHeaders(list(yaml_cfg.col_labels_dict.values()))
+    yaml_math.csv_w = csv_w
 
         # SET CSV WRITER TO
     raw_r.writer = csv_w
