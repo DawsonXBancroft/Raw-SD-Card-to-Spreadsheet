@@ -100,9 +100,9 @@ class YamlConfig():
             if self.verbosity.value > Verbosity.HIGH.value:
                 print("\n    Reading CFG_" + str(i))
             for key, value in yaml.safe_load(open(self.config_file_path))['CFG_' + str(i)].items():
-                self.config_block_info_dict["CFG_" + str(i) + ":" + key] = value
+                self.config_block_info_dict["CFG_" + str(i) + "_" + key] = value
                 if self.verbosity.value > Verbosity.HIGH.value:
-                    print("\t" + "CFG_" + str(i) + ":" + key + "\t" + str(value))
+                    print("\t" + "CFG_" + str(i) + ": " + key + "\t" + str(value))
 
         # get actual data info
         self.num_data_blocks = self.sd_card_setup_dict["NUM_DATA_BLOCKS"]
@@ -113,26 +113,51 @@ class YamlConfig():
             if self.verbosity.value > Verbosity.HIGH.value:
                 print("\nReading DB_" + str(i))
             for key, value in yaml.safe_load(open(self.config_file_path))['DB_' + str(i)].items():
-                self.data_block_info_dict["DB_" + str(i) + ":" + key] = value
+                self.data_block_info_dict["DB_" + str(i) + "_" + key] = value
                 if self.verbosity.value > Verbosity.HIGH.value:
-                    print("\t" + "DB_" + str(i) + ":" + key + "\t" + str(value))
+                    print("\t" + "DB_" + str(i) + "_" + key + "\t" + str(value))
 
 
         # get config math blocks
         if self.verbosity.value > Verbosity.HIGH.value:
-            print("\nGetting" + str(self.sd_card_setup_dict["NUM_CFG_MATH_BLOCKS"]) + " Config Math")
+            print("\nGetting " + str(self.sd_card_setup_dict["NUM_CFG_MATH_BLOCKS"]) + " Config Math Blocks")
         for i in range(self.sd_card_setup_dict["NUM_CFG_MATH_BLOCKS"]):
             if self.verbosity.value > Verbosity.HIGH.value:
                 print("\nReading MATH_CFG_" + str(i))
-            for key, value in yaml.safe_load(open(self.config_file_path))['DB_MATH_' + str(i)].items():
-                self.
+            for key, value in yaml.safe_load(open(self.config_file_path))['CFG_MATH_' + str(i)].items():
+                self.math_config_dict[key] = value
+                if self.verbosity.value > Verbosity.HIGH.value:
+                    print("\t" + "CFG_MATH_" + str(i) + ": " + key + "\t" + str(value))
 
         # get actual data math blocks
+        if self.verbosity.value > Verbosity.HIGH.value:
+            print("\nGetting " + str(self.sd_card_setup_dict["NUM_DB_MATH_BLOCKS"]) + " DB Math Blocks")
+        for i in range(self.sd_card_setup_dict["NUM_DB_MATH_BLOCKS"]):
+            if self.verbosity.value > Verbosity.HIGH.value:
+                print("\nReading MATH_DB_" + str(i))
+            for key, value in yaml.safe_load(open(self.config_file_path))['DB_MATH_' + str(i)].items():
+                self.math_data_dict[key] = value
+                if self.verbosity.value > Verbosity.HIGH.value:
+                    print("\t" + "DB_MATH_" + str(i) + ": " + key + "\t" + str(value))
 
         # print out that the yaml database is completely read if verbosity is high enough
         if self.verbosity.value > Verbosity.HIGH.value:
             print("\nYAML file read in completely\n")
 
+        # check the databases as much as possible
+        for col in self.col_vars_dict.values():
+            found_value = False
+            for math in self.math_data_dict.keys():
+                if col == math:
+                    if found_value == True:
+                        print("FATAL: TWO ENTRIES EXIST AS " + col)
+                        sys.exit()
+                    found_value = True
+            if found_value == False:
+                print("FATAL: NO ENTRIES IN MATH DICTIONARY EXIST " + col)
+                sys.exit()
 
-
+        # print out that the yaml database is checked if verbosity is high enough
+        if self.verbosity.value > Verbosity.HIGH.value:
+            print("\nYAML databases cheecked as much as possible\n")
 

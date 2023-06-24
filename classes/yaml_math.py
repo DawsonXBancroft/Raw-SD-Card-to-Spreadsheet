@@ -55,17 +55,20 @@ class YamlMath:
             if self.verbosity.value > Verbosity.HIGH.value:
                 print("\nERROR: No blocks added for this data math.\n")
         else:
+            temp_dict = {}
             if self.verbosity.value > Verbosity.HIGH.value:
                 print("\nDetected " + str(len(self.block_arr)) + " blocks of actual data.\n")
-            for i in range(len(self.block_arr)):
+            #for i in range(len(self.block_arr)):
+            for i in range(self.yaml_cfg.num_data_blocks):
+                for j in range(self.yaml_cfg.sd_card_setup_dict["NUM_BYTES_DB_" + str(i)]):
+                    temp_dict[self.yaml_cfg.data_block_info_dict["DB_" + str(i) + "_BYTE_" + str(j)]] = int(self.block_arr[i].values[j], 16)
 
-                for j in range(len(self.yaml_cfg.math_data_dict)):
-                    string_temp = "DB_" + i + ":BYTE_" + j
-                    if string_temp in self.yaml_cfg.math_config_block_info_dict.keys():
-                        self.data_dict[self.yaml_cfg.math_data_block_info_dict[string_temp]] = block.values[j]
+
         # perform math
         print(len(self.block_arr))
         print(self.config_dict)
+        print(temp_dict)
+
         # empty the array
         self.block_arr.clear()
 
