@@ -87,4 +87,77 @@ class YamlMath:
         elif ')' in expressionIn:
             print("\nFATAL: \')\' FOUND BUT EXPECTING \'(\' AS WELL, CHECK YAML CONFIG")
             sys.exit()
+        else:
+            if '+' in expressionIn:
+                split_expression = expressionIn.split(',')
+                if len(split_expression)!=3:
+                    print("\nFATAL: EXPRESSION ERROR CHECK YAML CONFIG")
+                    sys.exit()
 
+                if self.is_number(split_expression[1]):
+                    operand1 = float(split_expression[1])
+                else:
+                    operand1 = float(self.data_dict[split_expression[1]])
+
+                if self.is_number(split_expression[2]):
+                    operand2 = float(split_expression[2])
+                else:
+                    operand2 = float(self.data_dict[split_expression[2]])
+                return (operand1 + operand2)
+            elif '-' in expressionIn:
+                split_expression = expressionIn.split(',')
+                if len(split_expression)!=3:
+                    print("\nFATAL: EXPRESSION ERROR CHECK YAML CONFIG")
+                    sys.exit()
+
+                if self.is_number(split_expression[1]):
+                    operand1 = float(split_expression[1])
+                else:
+                    operand1 = float(self.data_dict[split_expression[1]])
+
+                if self.is_number(split_expression[2]):
+                    operand2 = float(split_expression[2])
+                else:
+                    operand2 = float(self.data_dict[split_expression[2]])
+                return (operand1 - operand2)
+            elif '*' in expressionIn:
+                split_expression = expressionIn.split(',')
+                if len(split_expression)!=3:
+                    print("\nFATAL: EXPRESSION ERROR CHECK YAML CONFIG")
+                    sys.exit()
+
+                if self.is_number(split_expression[1]):
+                    operand1 = float(split_expression[1])
+                else:
+                    operand1 = float(self.data_dict[split_expression[1]])
+
+                if self.is_number(split_expression[2]):
+                    operand2 = float(split_expression[2])
+                else:
+                    operand2 = float(self.data_dict[split_expression[2]])
+                return (operand1 * operand2)
+            elif '/' in expressionIn:
+                split_expression = expressionIn.split(',')
+                if len(split_expression)!=3:
+                    print("\nFATAL: EXPRESSION ERROR CHECK YAML CONFIG")
+                    sys.exit()
+
+                if self.is_number(split_expression[1]):
+                    operand1 = float(split_expression[1])
+                else:
+                    operand1 = float(self.data_dict[split_expression[1]])
+
+                if self.is_number(split_expression[2]):
+                    operand2 = float(split_expression[2])
+                else:
+                    operand2 = float(self.data_dict[split_expression[2]])
+                return (operand1 / operand2)
+            elif "<<" in expressionIn:
+
+
+    def is_number(self, num):
+        try:
+            float(num)
+        except ValueError:
+            return False
+        return True
