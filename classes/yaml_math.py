@@ -163,10 +163,10 @@ class YamlMath:
                 else:
                     operator = int(self.data_dict[split_expression[0]])
                 if self.is_number(split_expression[1]):
-                    operand = float(split_expression[1])
+                    operand = int(split_expression[1])
                 else:
-                    operand = float(self.data_dict[split_expression[1]])
-                return 3 # (operand << operator)
+                    operand = int(self.data_dict[split_expression[1]])
+                return (operand << operator)
             elif ">>" in expressionIn:
                 split_expression = expressionIn[expressionIn.find(">>")+2:]
                 split_expression = split_expression.split(",")
@@ -175,10 +175,10 @@ class YamlMath:
                 else:
                     operator = int(self.data_dict[split_expression[0]])
                 if self.is_number(split_expression[1]):
-                    operand = float(split_expression[1])
+                    operand = int(split_expression[1])
                 else:
-                    operand = float(self.data_dict[split_expression[1]])
-                return 4 # (operand >> operator)
+                    operand = int(self.data_dict[split_expression[1]])
+                return (operand >> operator)
 
     def is_number(self, num):
         try:
