@@ -87,6 +87,9 @@ class CMDLineParser:
                 if args[i + 1].upper() == "DEBUG":
                     self.config_file_path = "config/debug.yaml"
                     i = i + 1
+                elif args[i + 1].upper() == "SIMPLE":
+                    self.config_file_path = "config/simple.yaml"
+                    i = i + 1
                 else:
                     print("FATAL: NO TYPE FOUND FOR " + args[i + 1])  # TODO: REPLACE WITH STD FILE
                     sys.exit()

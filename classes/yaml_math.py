@@ -179,6 +179,13 @@ class YamlMath:
                 else:
                     operand = int(self.data_dict[split_expression[1]])
                 return (operand >> operator)
+            elif "=" in expressionIn:
+                split_expression = expressionIn.split(",")
+                if self.is_number(split_expression[1]):
+                    answer = int(split_expression[1])
+                else:
+                    answer = int(self.data_dict[split_expression[1]])
+                return (answer)
 
     def is_number(self, num):
         try:
